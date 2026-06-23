@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ & Wiki — IUP ITB 2026</title>
+<style>
+  :root {
+    --navy:         #0D2B55;
+    --navy-mid:     #164080;
+    --navy-dark:    #091D3A;
+    --gold:         #C89A2E;
+    --gold-light:   #F5E6B8;
+    --cream:        #FAF8F3;
+    --text:         #1A1A2E;
+    --muted:        #5A6478;
+    --border:       #D8D4C8;
+    --green:        #2E7D32;
+    --green-bg:     #E8F5E9;
+    --amber:        #C84B00;
+    --amber-bg:     #FFF3E0;
+    --amber-border: #FFBA80;
+    --blue-bg:      #EAF0FB;
+    --blue-border:  #90CAF9;
+    --blue-text:    #164080;
+
+    /* layout */
+    --max-w:        860px;
+    --gutter:       24px;
+    --nav-h:        44px;
+    --search-h:     42px;
+    --scroll-off:   calc(var(--nav-h) + var(--search-h) + 20px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ─────────────── CONTAINER ─────────────── */
+  /* Single centering rule used everywhere */
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* ─────────────── HEADER ─────────────── */
+  .header-wrap {
+    background: var(--navy);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  /* subtle gold circles — decorative only */
+  .header-wrap::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 92% 20%, rgba(200,154,46,.13) 0%, transparent 45%),
+      radial-gradient(circle at 8% 90%,  rgba(200,154,46,.07) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .header-main {
+    padding: 48px var(--gutter) 28px;   /* top breathing room fix */
+    position: relative;
+  }
+  .header-inner {                        /* centred, max-width aligned with content */
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .header-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    opacity: .85;
+  }
+  .header-main h1 {
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: normal;
+    line-height: 1.2;
+  }
+  .header-main h1 em { color: var(--gold); font-style: normal; }
+
+  /* ─────────────── DISCLAIMER ─────────────── */
+  .disclaimer {
+    border-top: 1px solid rgba(200,154,46,.2);
+    padding: 12px var(--gutter) 18px;
+    position: relative;
+  }
+  .disclaimer-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .disc-icon {
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    opacity: .75;
+  }
+  .disc-body {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,.52);
+    line-height: 1.65;
+  }
+  .disc-body strong { color: rgba(200,154,46,.8); }
+  .disc-links {
+    display: inline-flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 0 3px;
+  }
+  .disc-links a {
+    color: rgba(200,154,46,.75);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(200,154,46,.3);
+    transition: color .15s;
+  }
+  .disc-links a:hover { color: #fff; }
+
+  /* ─────────────── NAV ─────────────── */
+  nav {
+    background: var(--navy-mid);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;           /* Firefox */
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  /* centred nav content with left-padding that mirrors wrap */
+  .nav-inner {
+    display: inline-flex;             /* shrink to content width */
+    align-items: center;
+    min-width: 100%;                  /* at least full viewport */
+    height: var(--nav-h);
+    padding: 0 var(--gutter);
+    /* on wide screens, centre the links inside the band */
+    justify-content: flex-start;
+  }
+  /* On screens wider than max-w + gutters, shift content to match .wrap */
+  @media (min-width: calc(860px + 48px)) {
+    .nav-inner {
+      padding-left: calc((100vw - var(--max-w)) / 2);
+    }
+  }
+
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255,255,255,.6);
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    font-size: 11.5px;
+    padding: 0 10px;
+    height: var(--nav-h);
+    letter-spacing: .15px;
+    transition: color .15s;
+    flex-shrink: 0;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  nav a:hover  { color: rgba(255,255,255,.9); }
+  nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ─────────────── SEARCH ─────────────── */
+  .search-wrap {
+    background: var(--navy-dark);
+    height: var(--search-h);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--gutter);
+    position: sticky;
+    top: var(--nav-h);
+    z-index: 99;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .search-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .search-box {
+    width: 100%;
+    max-width: 360px;
+    height: 28px;
+    padding: 0 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(200,154,46,.22);
+    font-family: 'Arial', sans-serif;
+    font-size: 12.5px;
+    background: rgba(255,255,255,.07);
+    color: #fff;
+    outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  .search-box::placeholder { color: rgba(255,255,255,.32); }
+  .search-box:focus {
+    border-color: rgba(200,154,46,.45);
+    background: rgba(255,255,255,.11);
+  }
+  .search-empty {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,.38);
+    display: none;
+    white-space: nowrap;
+  }
+
+  /* ─────────────── MAIN CONTENT ─────────────── */
+  main { padding: 36px 0 72px; }
+
+  .section {
+    margin-bottom: 48px;
+    scroll-margin-top: var(--scroll-off);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .section-num {
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 16px;
+    color: var(--navy);
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* ─────────────── FAQ ITEMS ─────────────── */
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    transition: box-shadow .15s;
+  }
+  .faq-item:hover { box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 13px 15px;
+    font-family: 'Arial', sans-serif;
+    font-size: 13.5px;
+    font-weight: bold;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.4;
+    transition: background .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .faq-q:hover { background: var(--gold-light); }
+  .faq-q.open  { background: var(--navy); color: #fff; }
+  .faq-q.open .chevron { transform: rotate(180deg); color: var(--gold); }
+
+  .chevron {
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    transition: transform .22s;
+    margin-top: 3px;
+    opacity: .6;
+  }
+  .faq-q.open .chevron { opacity: 1; }
+
+  .faq-a {
+    display: none;
+    padding: 14px 15px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .faq-a.visible { display: block; }
+  .faq-a p { margin-bottom: 8px; }
+  .faq-a p:last-child { margin-bottom: 0; }
+
+  .hidden         { display: none !important; }
+  .section-hidden { display: none !important; }
+
+  /* ─────────────── QUOTE BLOCK ─────────────── */
+  .qa-block {
+    background: #f9f8f5;
+    border-left: 3px solid var(--gold);
+    padding: 9px 12px 8px;
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .qa-text {
+    font-size: 13px;
+    color: #252525;
+    margin-bottom: 6px;
+    line-height: 1.6;
+  }
+  .qa-source {
+    font-family: 'Arial', sans-serif;
+    font-size: 10.5px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  .qa-source::before { content: '—'; color: var(--gold); font-weight: bold; }
+  .src-name { font-weight: bold; color: var(--navy-mid); }
+  .src-num  {
+    color: var(--muted);
+    background: #ebebeb;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 10px;
+  }
+  .src-date { color: #8a96a8; }
+
+  /* ─────────────── NOTES ─────────────── */
+  .note {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    border-radius: 4px;
+    padding: 9px 11px;
+    margin-top: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.6;
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-border);
+    color: var(--amber);
+  }
+  .note-green { background: var(--green-bg); border-color: #A5D6A7; color: var(--green); }
+  .note-blue  { background: var(--blue-bg);  border-color: var(--blue-border); color: var(--blue-text); }
+  .note-icon  { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .note a     { color: inherit; text-decoration: underline; }
+  .note strong { font-weight: bold; }
+
+  /* ─────────────── LISTS & TABLES ─────────────── */
+  ul.bl { margin: 8px 0 8px 18px; font-size: 13.5px; }
+  ul.bl li { margin-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-family: 'Arial', sans-serif; font-size: 12.5px; margin: 10px 0; }
+  th { background: var(--navy); color: #fff; padding: 8px 11px; text-align: left; font-weight: 600; font-size: 12px; }
+  td { padding: 7px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: #F6F4EF; }
+
+  /* ─────────────── FOOTER ─────────────── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,.42);
+    padding: 24px var(--gutter);
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.9;
+  }
+  footer span { color: var(--gold); }
+  footer a { color: rgba(200,154,46,.65); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+
+  /* ─────────────── MOBILE ─────────────── */
+  @media (max-width: 600px) {
+    :root {
+      --gutter: 16px;
+      --nav-h:  46px;   /* taller tap target */
+    }
+    .header-main { padding-top: 36px; }
+    nav a { font-size: 11px; padding: 0 9px; }
+
+    /* stack search full width */
+    .search-box { max-width: 100%; }
+
+    /* tables scroll horizontally */
+    .faq-a { overflow-x: auto; }
+    table  { min-width: 480px; }
+
+    .faq-q { font-size: 13px; padding: 13px 12px; }
+    .faq-a { font-size: 13px; padding: 12px 12px 14px; }
+    .qa-text { font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-wrap">
+  <div class="header-main">
+  <div class="header-inner">
+    <div class="header-label">Panduan Orang Tua</div>
+    <h1>FAQ &amp; Wiki<br><em>IUP ITB 2026</em></h1>
+  </div>
+  </div><!-- /.header-inner -->
+  <div class="disclaimer">
+    <div class="disclaimer-inner">
+      <div class="disc-icon">⚠️</div>
+      <div class="disc-body">
+        <strong>Disclaimer</strong> — FAQ ini adalah kompilasi pertanyaan &amp; jawaban dari WAG orang tua IUP ITB 2026. Seluruh isi bersumber dari pengalaman dan pendapat sesama orang tua, bukan pernyataan resmi ITB maupun IOM-ITB. Informasi dapat berubah sewaktu-waktu tanpa pemberitahuan di sini.<br>
+        Untuk hal yang bersifat akademik, administratif, dan keuangan, verifikasi langsung ke pihak resmi ITB:
+        <span class="disc-links">
+          <a href="https://admission.itb.ac.id" target="_blank">admission.itb.ac.id</a>
+          <a href="mailto:helpdesk@itb.ac.id">helpdesk@itb.ac.id</a>
+          <a href="https://akademik.itb.ac.id" target="_blank">akademik.itb.ac.id</a>
+        </span><br>
+        Untuk hal yang bersifat pengalaman personal seperti kost, biaya hidup, dan kehidupan kampus — setiap pengalaman orang tua bisa berbeda.
+      </div>
+    </div><!-- /.disclaimer-inner -->
+  </div><!-- /.disclaimer -->
+</div><!-- /.header-wrap -->
+
+<nav id="main-nav">
+<div class="nav-inner">
+  <a href="#jalur-top">1. Jalur TOP</a>
+  <a href="#daful">2. Daftar Ulang</a>
+  <a href="#biaya">3. Biaya (UKT &amp; IPI)</a>
+  <a href="#nim-akun">4. NIM &amp; Akun ITB</a>
+  <a href="#kost">5. Kost &amp; Tempat Tinggal</a>
+  <a href="#kampus">6. Kehidupan Kampus</a>
+  <a href="#akademik">7. Akademik IUP</a>
+  <a href="#double-degree">8. Double Degree &amp; Exchange</a>
+  <a href="#ijazah-ln">9. Ijazah LN &amp; Penyetaraan</a>
+  <a href="#komunitas">10. Komunitas &amp; IOM-ITB</a>
+</div><!-- /.nav-inner -->
+</nav>
+
+<div class="search-wrap">
+  <div class="search-inner">
+    <input class="search-box" type="text" id="search-input" placeholder="🔍  Cari topik atau kata kunci..." oninput="searchFAQ(this.value)">
+    <span class="search-empty" id="search-empty">Tidak ditemukan</span>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+
+<!-- ===== 1. JALUR TOP ===== -->
+<div class="section" id="jalur-top">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">Jalur TOP (Talent Outreach Program)</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apa itu jalur TOP dan bedanya dengan SNBP/SNBT?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Jalur TOP ini jalur baru jadi belum ada pengalaman dr sebelumnya. Jadi baru juga buat kami"</div>
+        <div class="qa-source"><span class="src-name">Yoni Dyah L</span> <span class="src-num">...9023</span> <span class="src-date">· Wakil Ketua Umum IOM-ITB · 18 Mar 2026</span></div>
+      </div>
+      <p>TOP (Talent Outreach Program) adalah jalur seleksi khusus ITB yang ditawarkan hanya ke sekolah-sekolah tertentu yang diundang. Bersifat selektif per sekolah, berbeda dari SNBP yang nasional terbuka.</p>
+      <div class="note"><span class="note-icon">⚠️</span><span>Jalur TOP wajib diambil jika anak sudah dinyatakan lolos. Melepas tawaran dapat berdampak ke reputasi sekolah untuk tahun berikutnya.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apakah anak bisa ikut SNBP sekaligus TOP?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Seingat aku pas ortu dibriefing utk jalur TOP yg namanya yg terpilih sebelum diserahkan ke ITB diinfokan harus diambil jika lulus, krn kasian nanti adik kelasnya thn depan bisa kena blacklist sekolahnya, kalau ngak salah ya dan diinfokan juga harusnya klw sdh lulus jalur TOP nama anak sdh dikunci ya tidak bisa ikut SNBP, mkn ada kesalahan system ya bisa ditanyakan ke gur BK nya, kalau bisa sampai ikut 2 jalur setelah lulus TOP"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...2939</span> <span class="src-date">· 2 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Kalau di sekolah anak saya waktu daftar TOP tapi belum mundur dari SNBP maka saat SNBP memilih jurusannya sama dengan jurusan di TOP dan kalau diterima SNBP yang diambil yang TOP. Tapi saya kurang tau apakah ini kebijakan dari ITB atau dari sekolah."</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...5585</span> <span class="src-date">· 2 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Karena daftar ulang dan pembayaran TOP ITB 1 hari sebelum pengumuman SNBP..<br>Otomatis sudah terdaftar mjd mhs."</div>
+        <div class="qa-source"><span class="src-name">Selmi (mama Almira)</span> <span class="src-num">...3579</span> <span class="src-date">· 2 Apr 2026</span></div>
+      </div>
+      <div class="note"><span class="note-icon">💡</span><span>Kebijakan bisa berbeda per sekolah. Konfirmasikan langsung ke sekolah dan pihak ITB — jalur TOP masih baru dan belum ada preseden.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Ada berapa batch IUP dan perbedaan timeline-nya?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"TOP yang sudah dapat NIM. IUP 1 menunggu ya."</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 6 Apr 2026</span></div>
+      </div>
+      <p>Terdapat beberapa batch IUP (Batch 1, Batch 2, dst.). Batch TOP memiliki timeline daful dan NIM lebih awal. IUP Batch 1 menyusul, Batch 2 lebih lambat lagi. Antrian verifikasi dokumen dilakukan satu per satu oleh admission.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 2. DAFTAR ULANG ===== -->
+<div class="section" id="daful">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">Daftar Ulang (Daful)</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Di mana portal daftar ulang dan apa saja yang diisi?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Ini ada semua di petunjuk daftar ulang, dibaca teliti petunjuknya"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...6321</span> <span class="src-date">· 26 Mar 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Betul daftar ulang sebaiknya anak2 yang lebih aktif. <br>Jika ada pertanyaan yg sudah ditanyakan di wag ini sebaiknya dibaca dulu jadi pertanyaan tidak berulang2"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...6321</span> <span class="src-date">· 26 Mar 2026</span></div>
+      </div>
+      <p>Daftar ulang dilakukan melalui portal <strong>admission.itb.ac.id</strong> dan sistem <strong>SIX ITB</strong>. Sebaiknya anak yang mengerjakan sendiri, bukan orang tua.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Dokumen apa saja yang dibutuhkan? Ada yang bisa menyusul?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Se ingat sy dulu, dokumen2 yg bisa menyusul itu spt ijazah, alamat tinggal kuliah (kostan/apart), asuransi/bpjs, jd itu bisa di lewatkan dulu nanti jika sdh lengkap bisa di isi kembali"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 26 Mar 2026</span></div>
+      </div>
+      <ul class="bl">
+        <li>Ijazah SMA — bisa menyusul, <strong>deadline: 15 Juli</strong>. Jika belum wisuda gunakan SKL/STL yang ada fotonya</li>
+        <li>Surat Keterangan Lulus (SKL/STL) — deadline upload ulang: <strong>17 Juni</strong></li>
+        <li>Kartu Keluarga (KK) dengan barcode</li>
+        <li>Akta Kelahiran (asli yang discan, bukan fotokopi)</li>
+        <li>Foto untuk KTM (bebas background)</li>
+        <li>Surat Keterangan Bebas Buta Warna — hanya prodi tertentu</li>
+        <li>Bukti BPJS/Asuransi — bisa menyusul</li>
+        <li>Alamat kost/apartemen — bisa menyusul</li>
+        <li>Form Education Fees Payment Willingness — perlu tanda tangan fisik</li>
+        <li>Form Internalization Program Willingness — perlu tanda tangan fisik</li>
+      </ul>
+      <div class="note note-blue"><span class="note-icon">ℹ️</span><span>Cross merah (✗) pada dokumen di SIX bukan berarti ditolak — bisa juga berarti belum diperiksa. Verifikasi dilakukan satu per satu dan butuh waktu beberapa hari.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Surat bebas buta warna — wajib semua prodi? Syaratnya apa?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Ga bu. <br>Sesuai yang diminta di six ITB per prodi beda"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 26 Mar 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Surket buta warna dari dr spesialis RS atau puskesmas .<br>Dan dipastikan cap rumah sakit dan ttd dokter hrs mengenai foto mhsw."</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...5666</span> <span class="src-date">· 26 Mar 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Harus:<br>1. Ada foto<br>2. Ada stempel kena dengan foto<br>3. Dengan dr spesialis mata"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 16 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Selain Sekolah Farmasi tidak perlu Surat Keterangan Tidak Buta Warna ibu2 🙏🏻🙏🏻 dikosongkan saja, walau dibagian status di cross merah tp ttp akan diverifikasi oleh admission"</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 16 Jun 2026</span></div>
+      </div>
+      <p>Wajib hanya untuk prodi tertentu (Farmasi dan yang tercantum di SIX). Jika diwajibkan: harus dokter spesialis mata, ada foto yang dikenai cap dan tanda tangan dokter. Cross merah di SIX untuk prodi yang tidak mewajibkan tidak menjadi masalah.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Bagaimana cara finalisasi dan apa tanda sudah selesai daful?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Tanda nya jika di pembayaran sdh tertulis tgl bayar &amp; sudah finalisasi bu udh "SAH" insyaAllah"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 26 Mar 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"NIM akan di berikan nanti bu setau sy, yg skr ini masih temporary<br>Nanti akan berubah lg dan akan dpy NIM yg permanent nya"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 26 Mar 2026</span></div>
+      </div>
+      <p>Finalisasi harus selesai sebelum bisa membayar. Setelah finalisasi + pembayaran berhasil, status di SIX terupdate otomatis. Tidak ada KTM sementara — KTM langsung permanen.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 3. BIAYA ===== -->
+<div class="section" id="biaya">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">Biaya: UKT dan IPI</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apa itu UKT dan IPI? Berapa besarannya dan bisa dicicil?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Yg IPI by default ternyata akan dibagi 3 kali pembayaran...kalau bayar lewat VA BCA akan keluar nilai cicilan pertama, tapi kalau mau lunas...masukan saja angka nya"</div>
+        <div class="qa-source"><span class="src-name">Orang tua (mama Renata)</span> <span class="src-num">...6652</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <table>
+        <tr><th>Komponen</th><th>Keterangan</th><th>Cicilan</th></tr>
+        <tr><td><strong>UKT</strong></td><td>Uang Kuliah Tunggal per semester. Besaran sesuai prodi (awal muncul Rp 30 jt, kemudian diperbarui)</td><td>Per semester. Bisa cicil via pengajuan ke TMS DirKeu</td></tr>
+        <tr><td><strong>IPI</strong></td><td>Iuran Pengembangan Institusi (uang pangkal). Total bervariasi ~Rp 70 jt</td><td>Default dibagi 3x cicilan (semester 1–3). Bisa dilunasi langsung</td></tr>
+      </table>
+      <div class="note"><span class="note-icon">⚠️</span><span>VA untuk IPI dan UKT <strong>berbeda</strong>. Jangan dijadikan satu transfer. Jika terlanjur salah, kirim email ke <strong>bpp@itb.ac.id</strong> dari email anak, sertakan bukti bayar + screenshot SIX.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Cara bayar via Virtual Account — bank apa yang bisa dipakai?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Dari grup snbp, pembayaran melalui BNi, BCA, BSI, CIMB hari ini terpantau lancar."</div>
+        <div class="qa-source"><span class="src-name">Yoni Dyah L</span> <span class="src-num">...9023</span> <span class="src-date">· Wakil Ketua Umum IOM-ITB · 6 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"VA IPI dg BNI:<br><br>70330+no reg+265"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...1778</span> <span class="src-date">· 6 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Alhamdulillah sudah berhasil. Untuk IPI : Via mandiri<br>10068+No.NIM<br>Tahun akademik: 20265<br><br>UKT :<br>Tahun akademiknya : 20261"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...8222</span> <span class="src-date">· 6 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Selama nomor VA nya sesuai dng nama anak kita pasti tagihan sesuai mba<br>Jika 1 digit salah, pasti error"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 27 Mar 2026</span></div>
+      </div>
+      <p>Bank yang dilaporkan lancar: BCA, BNI, BSI, CIMB, Mandiri. Jika satu bank error, coba bank lain. Bisa juga via teller bank (butuh waktu lebih lama untuk terupdate di SIX).</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 4. NIM & AKUN ITB ===== -->
+<div class="section" id="nim-akun">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">NIM, Akun ITB (SSO), SIX, dan MySIX</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Kapan NIM permanen keluar dan apa langkah selanjutnya?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"NIM biasa serentak setelah semua selesai daftar ulang  <br><br>Tidak langsung setelah pembayaran"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 6 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Sdh dijawab bu..betul NIM = Nomer Seleksi"</div>
+        <div class="qa-source"><span class="src-name">Susanti Dewi - Nala</span> <span class="src-date">· 26 Mar 2026</span></div>
+      </div>
+      <p>NIM sementara = Nomor Seleksi. NIM permanen dikeluarkan serentak setelah semua mahasiswa selesai daful — tidak langsung setelah bayar. Setelah NIM keluar, langkah berikutnya adalah aktivasi Akun ITB (SSO).</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Step by step aktivasi Akun ITB setelah NIM keluar<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"RANGKUMAN TATA CARA JADI MABA ITB<br><br>A. STEP LOGIN ITB ACC<br><br>✅STEP ONE: login ke it account<br>1. log out website six<br>2. klik kanan atas &gt; log in<br>2. login kembali tapi pilih yg ITB ACCOUNT<br>3. masukan username: nim@mahasiswa.itb.ac.id, masukkan password<br>4. muncul screen "password is incorrect" &gt; klik forgot<br>5. buat password baru (usahakan ada huruf kapital, angka, dan tanda)<br>6. setelah verified, nanti diarahkan ke security info. ada 2 cara: pakai microsoft authenticator atau pakai mobile phone number<br>7. setelah selesai, klik done<br><br>✅ STEP TWO: menambahkan email<br>1. masuk lagi ke six &gt; login it account &gt; pakai nim@mahasiswa.ac.id &gt; masukka password yg baru dibikin<br>2. ke menu profil lalu tambahkan email nim@mahasiswa.itb.ac.id<br><br>✅STEP 3: login ke mysix<br>1. buka aplikasi mysix (download dulu kalau belum)<br>2. masukkan username dan password ke itb account<br><br>PENTING<br>Jangan lupa mendaftar MSTEAMS menggunakan gmail ITB yang sudah di buat, karena segala indormasi dan email yang masuk akan di share di MSTEAMS<br><br>CATATAN<br>Saat verified password menggunakan nomor 12 di belakang ** itu cuma contoh saja<br>• coba aja masukin nomor kalian tanpa +62 &amp; tanpa 0 (lsg ke 8)"</div>
+        <div class="qa-source"><span class="src-name">Orang tua (Admin STEI, ortu STEI-K 2024)</span> <span class="src-num">...2895</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <div class="note note-blue"><span class="note-icon">ℹ️</span><span>Jika ada trouble, hubungi SPSI ITB. Kontak bisa diminta di grup WAG.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Cara aktivasi dan login akun SIX untuk orang tua<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Tahapan membuat akun SiX untuk Orang tua<br>1. Minta anak untuk mengaktifkan akun orang tua di Control Panel<br>2. Masukkan alamat email (bisa alamat email anak jika tdk punya email) dan Buat Password<br>3. Masuk dengan userID: orangtua-NIM<br><br>Cara login ke akun SiX untuk Orang Tua<br>1. Ketik di browser https://six.itb.ac.id/login<br>2. Pilih Non-ITB Account<br>3. Masukkan userID: orangtua-NIM anak<br><br>Misal NIM anak :12345678<br>UserID orang tua : orangtua-12345678"</div>
+        <div class="qa-source"><span class="src-name">Orang tua (Admin STEI, ortu STEI-K 2024)</span> <span class="src-num">...2895</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <p>Aktivasi akun SIX orang tua dilakukan oleh <strong>anak</strong> dari Control Panel-nya. Baru bisa dilakukan setelah anak berhasil login akun ITB-nya.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apa itu SSO ITB dan kapan bisa dipakai?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Single sign on.<br>Harusnya blm punya<br>SSO akan aktif ketika sdh ada NIM dan passwordnya"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...1778</span> <span class="src-date">· 6 Apr 2026</span></div>
+      </div>
+      <p>SSO adalah portal terpadu ITB untuk akses email, akademik, dan sistem lainnya. Baru aktif setelah NIM permanen diterima dan password ITB disetel. Akses di <strong>akademik.itb.ac.id</strong>.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Pretest / pemetaan — berpengaruh ke penjurusan IUP?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Saya bantu jawab bu. Utk IUP tidak berpengaruh ke penjurusan ya bu."</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 16 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Mafiki<br>Soal sma"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 12 Apr 2026</span></div>
+      </div>
+      <p>Pemetaan adalah tes kesiapan akademik (soal Mafiki setara SMA). Tidak berpengaruh ke kelas atau jurusan IUP yang sudah dipilih. Info jadwal di <strong>ditsama.itb.ac.id/pemetaan</strong>.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 5. KOST ===== -->
+<div class="section" id="kost">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Kost dan Tempat Tinggal di Jatinangor</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Kapan waktu terbaik mulai cari kost?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Jangan lupa yg sdh selesai finalisasi &amp; pembayaran, survey2 kostan yaa, sebelum SNBP pengumuman.. <br><br>Pengalaman tahun kemarin, emak2 SNBP lebih ganas survey2 nya😅🙏"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 27 Mar 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Iyaa rata2 kating2 nya baru kosongin &amp; pindah ke bandung itu bulan juni-juli, jd kostan per agustus baru bisa di isi sama camaba"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 30 Apr 2026</span></div>
+      </div>
+      <p>Survey secepatnya setelah daful selesai. Booking bisa dari sekarang tapi kost baru bisa ditempati sekitar <strong>Juli–Agustus</strong> setelah kating pindah ke Ganesha.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Kost apa yang banyak direkomendasikan? Ada yang tidak direkomendasikan?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Kalo boleh saran, jgn di Wangsa 🙏🏻🙏🏻"</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 20 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Kating2 tdk rekomendasikan komoleks wangsa"</div>
+        <div class="qa-source"><span class="src-name">Yoni Dyah L</span> <span class="src-num">...9023</span> <span class="src-date">· Wakil Ketua Umum IOM-ITB · 20 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"caringin, kampung geulis, louvin, pinewood"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 20 Jun 2026</span></div>
+      </div>
+      <table>
+        <tr><th>Nama</th><th>Gender</th><th>Catatan</th></tr>
+        <tr><td><strong>Bukari (Bumi Kartika Asri)</strong></td><td>Campur (pisah gedung)</td><td>AC, kamar besar, kafe, shuttle ke kampus tiap 30 menit</td></tr>
+        <tr><td><strong>Awani / Awani 2</strong></td><td>Campur</td><td>Populer, cepat sold out</td></tr>
+        <tr><td><strong>Kampung Geulis</strong></td><td>Campur</td><td>Dekat kampus, bisa jalan kaki</td></tr>
+        <tr><td><strong>Louvin Apartment</strong></td><td>Campur</td><td>Studio 23 m², 500 m dari ITB, access card</td></tr>
+        <tr><td><strong>GW House</strong></td><td>Putra</td><td>AC, kamar mandi dalam, Jl. Caringin</td></tr>
+        <tr><td><strong>Sabila Sumiar</strong></td><td>Putri</td><td>Dekat kampus, tanpa lift</td></tr>
+        <tr><td><strong>The Hill</strong></td><td>Campur per lantai</td><td>Lt 3 putra, Lt 2 putri</td></tr>
+        <tr><td><strong>Pinewood</strong></td><td>Campur</td><td>Apartemen, pergaulan dilaporkan ok</td></tr>
+        <tr><td><strong style="color:var(--amber)">Kompleks Wangsa</strong></td><td>—</td><td>❌ Tidak direkomendasikan kating dan orang tua yang sudah survey</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Kontak beswan IOM-ITB untuk bantu survey kost<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"*#carikosiomitb*<br><br>Dari luar kota? Kesulitan mencari kos? Tidak bisa survey?<br><br>IOM-ITB sebagai salah satu Mitra ITB, menyalurkan bantuan finansial kepada mahasiswa ITB yang punya tantangan lebih dr sisi keuangan. Penerima bantuan tersebut biasa kami sebut dg istilah Beswan. Untuk membantu calon mahasiswa baru yang kesulitan survey kost, Beswan IOM-ITB (mahasiswa penerima beasiswa) bisa membantu mengecek langsung kondisi kos di sekitar kampus ITB Jatinangor.<br><br>Bapak/Ibu bisa menghubungi nomor berikut:<br>1. Sylvan - 082268179529<br>2. Fito - 081392003303<br>3. Bili - 081398910423<br>4. Abraham - 081396283757<br>5. Rayhanita - 081298757224<br>6. Ayu - 08977835834<br>7. Zahra - 085786214913<br>8. Rian - 081353776075<br>9. Defal - 081269805912<br>10. AL - 082129748354<br>11. Karla - 085524429672<br>12. Arya - 085608192580<br>13. Misyu - 085713864118<br><br>Untuk fee jasa survei sesuai keikhlasan Bapak/Ibu saja dan bisa dikomunikasikan dengan mahasiswanya langsung."</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 3 Apr 2026 &amp; 20 Jun 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Ada asrama ITB untuk mahasiswa umum?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Asrama itb di Jatinangor ada utk pria &amp; wanita, tp di khusus kan yg KIPK"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 26 Mar 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Di prioritaskan utk maba KIPK tp apabila msh tersisa quota bisa dialihkan utk maba reguler.<br><br>Pengumuman pembukaan pendaftaran asrama ada di Instagram asrama ITB."</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...5666</span> <span class="src-date">· 26 Mar 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Checklist survey kost dan peringatan pembayaran<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <p>Checklist dari IOM-ITB (Rini AJM, Apr 2026):</p>
+      <ul class="bl">
+        <li>Jarak ke kampus, akses jalan, potensi banjir/genangan</li>
+        <li>Aturan kost: jam malam, kebijakan merokok, boleh tamu menginap</li>
+        <li>Fasilitas: laundry, dapur, jemur, parkir, kulkas</li>
+        <li>Listrik: token/share, batas watt</li>
+        <li>Sinyal dan WiFi — cek langsung ke penghuni aktif</li>
+        <li>Ventilasi dan risiko lembap/jamur (umum di Jatinangor)</li>
+        <li>CCTV, security, sistem akses</li>
+      </ul>
+      <div class="note"><span class="note-icon">⚠️</span><span>Transfer ke pemilik resmi + minta kuitansi. Simpan bukti chat/perjanjian. Waspada kasus kamar "penuh" setelah DP. Jangan transfer ke pihak ketiga.</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 6. KEHIDUPAN KAMPUS ===== -->
+<div class="section" id="kampus">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Kehidupan Kampus di Jatinangor</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Semester 1–2 di mana? Kapan pindah ke Ganesha Bandung?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Angkatan 24 dan 25, semester 1 dan 2 di nangor. Blm ada perubahan setahu saya untuk angkatn 26"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...6321</span> <span class="src-date">· 27 Mar 2026</span></div>
+      </div>
+      <p>Seluruh mahasiswa baru menjalani TPB (Tahap Persiapan Bersama) 2 semester pertama di Jatinangor. Mulai semester 3, pindah ke kampus di Ganesha Bandung (tergantung fakultas).</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Jadwal awal masuk kampus dan OSKM 2026<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Kalau IUP tgl 28 Juli Bu"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...0358</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Di sini sih sy lihat 27-28-29-30 Juli kegiatan per fakultas nya, lalu OFF tgl 31 Juli sampai 2 Agustus, dan masuk lg tgl 3 agustus sampai seterus nya<br>Tlg di cek &amp; di koreksi jika sy salah🙏"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 8 Jun 2026</span></div>
+      </div>
+      <table>
+        <tr><th>Tanggal</th><th>Kegiatan</th></tr>
+        <tr><td>27 Juli 2026</td><td>Mahasiswa reguler mulai kegiatan</td></tr>
+        <tr><td>28 Juli 2026</td><td>Mahasiswa IUP mulai kegiatan</td></tr>
+        <tr><td>28–30 Juli</td><td>Kegiatan per fakultas (termasuk pembagian jaket/Jamal)</td></tr>
+        <tr><td>31 Jul – 2 Agt</td><td>Libur</td></tr>
+        <tr><td>3 Agustus 2026</td><td>Perkuliahan TPB dimulai</td></tr>
+      </table>
+      <div class="note note-blue"><span class="note-icon">ℹ️</span><span>Jadwal resmi PMB ITB 2026 di: <strong>akademik.itb.ac.id/id/pmb-2026</strong>. Disarankan tiba di Jatinangor H-1 atau H-2 sebelum kegiatan dimulai.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Transportasi dalam kampus Jatinangor — ada shuttle bus?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Iya krn jarak dari gerbang ke dlm kampus jauh dan menanjak.. jd mmg akhirnya semua naik kendaraan. Angkot ga ada juga"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...1099</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"kalo menurut yg senior, ponakan saya disana, pada akhirnya.. semua kan gojek"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...5767</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <p>Tidak ada shuttle antar gedung di dalam kampus. Mahasiswa umumnya jalan kaki atau Gojek motor. Medan kampus menanjak dari gerbang. Kost Bukari punya shuttle ke kampus tiap 30 menit sampai jam 17.00.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Keamanan lalu lintas di depan kampus Jatinangor<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Mohon hati hati yang membawa motor, karena banyak kejadian kecelakaan di depan itb nangor, karena merupakan jalan propinsi, sehingga sangat ramai dan dilalui truk, motor, mobil jadi satu🙏🏻"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...7720</span> <span class="src-date">· 11 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Terutama hati - hati didepan masjid ... banyak yg melawan arus... th 2025 sudah ada kejadian mahasiswi itb nangor yang  tertabrak truk 😭🙏🏻"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...7720</span> <span class="src-date">· 11 Apr 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Bolehkah orang tua masuk ke dalam kampus?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Padahal ITB sudah jelas2 bilang orang tua tidak boleh masuk kampus"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...6321</span> <span class="src-date">· 11 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Boleh ko kalau mau lihat2 sih. Hanya nanti pas pemetaan itu jangan ditugguin"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...6321</span> <span class="src-date">· 11 Apr 2026</span></div>
+      </div>
+      <p>Saat kegiatan akademik dan pemetaan, orang tua tidak diperkenankan masuk dan menunggu di kampus (kantin jadi penuh, mengganggu maba lain). Survey kampus di luar jam kegiatan diperbolehkan dan dikawal security.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Pakaian kuliah dan OSKM — ada ketentuan?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Pagiii... <br><br>Utk kegiatan2 tsb anak nya bisa tanya dengan Kating nya yaa bu.. Tapi yg sy tau (pengalaman anak sy tahun lalu) selain kegiatan OSKM baju yg di gunakan bebas, rapi &amp; sopan. <br><br>Selama kuliah juga baju nya bebas &amp; rapi/sopan &amp; pakai sepatu (tdk menggunakan sendal apalagi sendal jepit) kadang ada dosen yg meminta anak2 nya pakai baju berkerah."</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 21 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Utk OSKM siapkan seragam sekolah yaa : <br>- Baju SMA (Putih/abu) <br>- Hitam-Putih<br>- Kaos OSKM <br>- Batik Sekolah/Batik Bebas<br><br>Silahkan ananda tanya dengan kating nya masing2 utk info lebih pasti nya🙏"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 21 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Saya bantu jawab ya bu, Kalo tahun lalu anak saya ttp pakai seragam sekolahnya yg model polo shirt."</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 21 Jun 2026 (untuk anak yang sekolahnya tidak punya seragam putih-abu)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Biaya hidup di Jatinangor — perkiraan berapa per bulan?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Klo di Jatinangor, setahu saya lebih murah dr Jakarta"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 21 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Tp percayalah.. Warteg atau cafe di Jatinangor itu masih lebih murah di banding bandung (menurut sy yaa)😅 <br><br>15k anak2 sdh bisa pesan makan dng 2 lauk + sayur, dan cafe biasa nya kan hny buat nugas (kopi/choc 20-25k + cake +_ 50k) sdh bisa berjam2 di cafe🤭"</div>
+        <div class="qa-source"><span class="src-name">Rini AJM</span> <span class="src-num">...5565</span> <span class="src-date">· Admin IOM-ITB · 21 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Coba minta anaknya bikin simulasi detail, kemudian ajukan rab ke ortunya<br>Latihan bikin RAB"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...0702</span> <span class="src-date">· 21 Jun 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Bagaimana mahasiswa IUP terhubung dengan kating (kakak tingkat)?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Sepertinya kating mulai mengadakan pertemuan-pertemuan ONLINE. Apakah ananda sudah bergabung dengan grup camaba? Tolong kontak kating di aplikasi LINE ya"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 12 Apr 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Biasa yg IUP (baik di fakultas atau lintas fakultas), anak² buat sendiri setelah saling kenal"</div>
+        <div class="qa-source"><span class="src-name">Imelda</span> <span class="src-num">...8111</span> <span class="src-date">· Admin IOM-ITB · 21 Jun 2026</span></div>
+      </div>
+      <p>Grup resmi kating → camaba via aplikasi <strong>LINE</strong>. Untuk yang di luar negeri, perlu VPN atau ganti region App Store ke Indonesia. Kontak punakawan (kating yang ditugaskan menemani camaba) ada di Instagram IOM-ITB.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 7. AKADEMIK IUP ===== -->
+<div class="section" id="akademik">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">Akademik IUP — Bahasa Pengantar &amp; Kelas</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apakah kelas IUP 2026 dicampur dengan reguler?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Waktu TIM ITB datang ke Qatar, mrk memastikan bahwa pengajar dan pengajaran IUP akan full English, arti nya mrk akan dipisah bu..."</div>
+        <div class="qa-source"><span class="src-name">Orang tua (tinggal di Qatar)</span> <span class="src-num">+974...7095</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Info yg saya dapat waktu ikut zoom dg IUP ITB, th ini full English Bu. Sdh tidak campur dg reguler."</div>
+        <div class="qa-source"><span class="src-name">Orang tua (STEI)</span> <span class="src-num">...0618</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Kelas terpisah"<br><br>"Iy bu rini semua terpisah tp kl ada kegiatan2 ky OSKM ,CDT mereka bareng kok .."</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...9681</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Tahun2 sebelumnya (anak saya 2023) IUP ada 2 jalur, International Class (full english, 9 prodi) dan International Track (kuliah bergabung dengan reguler, 21 prodi)"</div>
+        <div class="qa-source"><span class="src-name">Naini</span> <span class="src-num">...1220</span> <span class="src-date">· 15 Apr 2026 (konteks: angkatan 26 sekarang semua full English)</span></div>
+      </div>
+      <p>Mulai angkatan 2026, seluruh program IUP full English dengan kelas terpisah dari reguler. OSKM dan CDT tetap bersama mahasiswa reguler.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Ijazah SMA yang belum keluar bisa menyusul?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Bisa pakai STL/SKL yang ada fotonya bu"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...3390</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Dateline upload ijazah 15 Juli. Dafulnya bisa dilakukan + bayar IPI &amp; UKT. Ijazah disusulkan."</div>
+        <div class="qa-source"><span class="src-name">Orang tua (STEI)</span> <span class="src-num">...0618</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Ada pertemuan OTM dengan ITB sebelum kuliah?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Utk pertemuan OTM dgn pihak ITB akan ada, mohon ditunggu jadwalnya yaa<br>Biasanya sblm mulai perkuliahan"</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 16 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Kata bu @Yoni nanti ada pertemuan ITB dengan ortu IUP, siapkan pertanyaan2 ya tentang Kurikulum dan lain2."</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...1547</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <p>Pertemuan OTM dengan ITB dikonfirmasi akan ada sebelum perkuliahan — pantau WAG untuk jadwalnya.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 8. DOUBLE DEGREE & EXCHANGE ===== -->
+<div class="section" id="double-degree">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">Double Degree dan Exchange ke Luar Negeri</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apa bedanya Double Degree dan Exchange? Wajib atau opsional?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Double degree tergantung kita, mau ambil ato tidak, tp klo exchange itu mandatory...setau sy begitu"</div>
+        <div class="qa-source"><span class="src-name">Orang tua (tinggal di Qatar)</span> <span class="src-num">+974...7095</span> <span class="src-date">· 8 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Unt STEIK yg Double degree msh dalam proses bu..<br>Unt yg STEIK Exchange sdh ada univ kerjasamanya."</div>
+        <div class="qa-source"><span class="src-name">Orang tua (Admin STEI, ortu STEI-K 2024)</span> <span class="src-num">...2895</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Biasa exchange/double degree di semester 7 ya, nanti akan ada penjelasannya yg lebih detail waktu zoom meeting dgn pihak fakultas."</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 23 Jun 2026</span></div>
+      </div>
+      <table>
+        <tr><th>Program</th><th>Keterangan</th><th>Biaya</th></tr>
+        <tr><td><strong>Exchange</strong></td><td>1 semester di kampus mitra, nilai dikonversi. Menurut info: mandatory untuk IUP</td><td>UKT ITB tetap (bayar 50% ke ITB) + living cost LN</td></tr>
+        <tr><td><strong>Double Degree</strong></td><td>Lulus dengan 2 gelar (ITB + kampus mitra). Opsional, tergantung prodi</td><td>UKT ITB + biaya kampus mitra LN</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Biaya saat anak exchange — UKT ke ITB tetap dibayar?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Betul Pak, tergantung negara. Anak saya lagi exchange (FTMD22) di Germany, tidak bayar UKT lagi di sana, tapi ada bayar dormitory dan buat public transportation. Untuk monthly expense deposit di awal , dan di ambil bulanan. Di ITB UKT nya bayar 50% semester ini."</div>
+        <div class="qa-source"><span class="src-name">Orang tua FTMD</span> <span class="src-num">...9195</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Kalau anak saya yang akan exchange ini, ukt semester seperti biasa bayar ke ITB<br>Menurut info kalau double degree bayarnya ke kampus ln"</div>
+        <div class="qa-source"><span class="src-name">Naini</span> <span class="src-num">...1220</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"seinget sy waktu pernah sy baca , kalau di universitas partner gratis, kita harus membayar uang kuliah 50% UKT<br>kalau harus bayar di univ partner kita harus bayar 5% dari biaya ukt"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...0506</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Persiapan visa dan administrasi exchange ke Eropa<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"oh ya...jangan last minute dan mepet2 yah....soalnya ada hal lain selain urusan teknis...yaitu masalah VISA terutama di negara EU.<br>siapkan kelengkapan administrasi nya di awal2..."</div>
+        <div class="qa-source"><span class="src-name">Orang tua FTMD</span> <span class="src-num">...9195</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"2. Visa : transfer ke rekening TU/e sebesar<br>3. Settlement dari bank bahwa di rekening ada dana setara lupa jumlahnya, ditotalkan untuk selama 6 bulan <br>4. Dorm : menunggu info dari pihak TU/e<br>5. Insurance, tes kesehatan begitu sampai sana, <br>6. Tiket pesawat berangkat"</div>
+        <div class="qa-source"><span class="src-name">Naini</span> <span class="src-num">...1220</span> <span class="src-date">· 22 Jun 2026 (pengalaman exchange ke TU/e Belanda)</span></div>
+      </div>
+      <div class="note"><span class="note-icon">⚠️</span><span>Proses visa negara EU bisa memakan waktu lama. Siapkan dokumen jauh sebelum deadline keberangkatan.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Universitas mitra mana saja yang tersedia?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Di laman IUP fakultas ada listnya, bu"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...0481</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Saya baca di web ITB utk electrical power engineering ada di Australia, jepan dan Jerman bu"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...9202</span> <span class="src-date">· 22 Jun 2026</span></div>
+      </div>
+      <p>Daftar universitas mitra per prodi tersedia di website masing-masing fakultas dan di: <strong>admission.itb.ac.id → Program Internasional</strong>. Contoh yang disebut di grup: FTMD ke Jerman, Electrical Power ke Australia (Curtin)/Jepang/Jerman, STEI-K Exchange sudah ada / Double Degree masih proses.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 9. IJAZAH LN ===== -->
+<div class="section" id="ijazah-ln">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">Ijazah dari Sekolah Luar Negeri &amp; Penyetaraan</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apakah penyetaraan ijazah LN wajib?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Menambakan ini prosses yg harus dilewati setelah isu ijazah palsu.  Penyetaraan ijazah adalah wajib"</div>
+        <div class="qa-source"><span class="src-name">Orang tua (domisili Qatar)</span> <span class="src-num">+974...5777</span> <span class="src-date">· 15 Jun 2026</span></div>
+      </div>
+      <p>Wajib untuk lulusan sekolah luar negeri. Cek persyaratan lengkap di link pengumuman IUP di <strong>akademik.itb.ac.id</strong>.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Bagaimana alur proses penyetaraan ijazah LN?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Salam Ibu, saya bantu jawab ya, sebelum diajukan ke Dikti/kemendikdasmen, harus mendapat surat pengantar penyetaraan Ijazah dari KBRI asal sekolah. Syarat utk dapat surat dari KBRI ini jg beda2 setiap negara, harus ditanyakan dulu ke pihak KBRI. Ada yg butuh Attestation dari MoE aja, ada juga yg butuh Attestation dari MoE dan MoFA. Ini pengalaman saya dari 2 anak, yg satu highschool di Saudi dan yg satu highschool di Bahrain."</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 15 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"*Semua* proses tanpa biaya kecuali yang di MoFA."</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 15 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Proses Surat penyetaraan di dikti biasa 1 minggu, tp kita harus bolak balik cek status di website selama proses verifikasi kadang penilik mintakan dokumen lainnya yg dibutuhkan."</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 15 Jun 2026</span></div>
+      </div>
+      <div class="note note-blue"><span class="note-icon">ℹ️</span><span>Untuk penyetaraan ijazah SMA LN, dibutuhkan juga penyetaraan ijazah SMP terlebih dahulu jika SMP-nya juga di LN. Mulai prosesnya jauh-jauh hari.</span></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Ijazah IB / AS Level baru keluar Agustus — bagaimana?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Jd bisa dikomunikasikan dgn pihak admission ITB utk minta waktu sampai ijazah keluar. Sdh banyak kok bu, dari dulu yg request ini, jd pihak admission biasa kasih tambahan waktu utk kita"</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 15 Jun 2026</span></div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-text">"Anak saya dulu begini, sampai sdh mulai perkuliahan baru ijazah keluar"</div>
+        <div class="qa-source"><span class="src-name">Febby Akbar</span> <span class="src-num">+966...9244</span> <span class="src-date">· 15 Jun 2026</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 10. KOMUNITAS & IOM-ITB ===== -->
+<div class="section" id="komunitas">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">Komunitas Orang Tua &amp; IOM-ITB</div></div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Apa itu IOM-ITB dan manfaatnya?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Melalui *IOM-ITB* — ikatan orang tua yang telah mendampingi ITB sejak 1968 — kita berhimpun bersama untuk memastikan tidak ada satu pun mahasiswa ITB yang terhambat dalam menyelesaikan pendidikannya. Karena mereka adalah bagian dari *Generasi Indonesia Emas 2045*."</div>
+        <div class="qa-source"><span class="src-name">Hendro Setyanto, SSi., M.Si.</span> <span class="src-num">...4990</span> <span class="src-date">· Ketua Umum IOM-ITB 2024–2027 · 16 Mar 2026</span></div>
+      </div>
+      <p>Manfaat bergabung: info terkini kegiatan kampus, program beasiswa IOM-ITB untuk mahasiswa yang membutuhkan, ruang diskusi antar orang tua, akses ke beswan untuk bantu cari kost.<br>Website: <strong>iom-itb.id</strong> · IG: <strong>@iom_itb.official</strong></p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Grup WAG apa saja yang perlu diikuti orang tua IUP?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <div class="qa-block">
+        <div class="qa-text">"Wag yang dikelola IOM<br>- wag jalur masuk -- ini untuk diskusi tentang daftar ulang Dan lbh administratic<br>- wag Fakultas/sekolah: ini untuk lbh detail &amp; kedekatan para orang tua <br><br>Ada juga wag IOM Wilayah. Agar lbh memudahkan jika ternyata ada kedaruratan yg selama ini sering kejadian"</div>
+        <div class="qa-source"><span class="src-name">Orang tua</span> <span class="src-num">...1547</span> <span class="src-date">· 21 Jun 2026</span></div>
+      </div>
+      <table>
+        <tr><th>Grup</th><th>Isi</th><th>Link</th></tr>
+        <tr><td>WAG IUP (grup ini)</td><td>Semua orang tua IUP 2026, diskusi daful &amp; info umum</td><td>tiny.cc/iomitbiup2026</td></tr>
+        <tr><td>WAG Fakultas</td><td>Per Fakultas/Sekolah, lebih spesifik</td><td>taplink.cc/wag.iomitb2026</td></tr>
+        <tr><td>WAG Wilayah</td><td>Per kota/wilayah domisili orang tua</td><td>taplink.cc/wagwilayahiomitb</td></tr>
+        <tr><td>WAG Middle East / Luar Negeri</td><td>Ortu domisili LN</td><td>Dibagikan di grup utama</td></tr>
+      </table>
+      <p style="margin-top:8px">Format link WAG Fakultas: <code>tinyurl.com/IOM-ITB-[KODE]-2026</code> (FTI, FTMD, FTTM, FSRD, FTSL, FITB, FMIPA, STEI, SAPPK, SF, SBM, SITH)</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Video panduan SIX ITB (keuangan, perwalian, KSM)<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="faq-a">
+      <p>IOM-ITB membagikan video panduan SIX ITB di YouTube (Apr 2026):<br><strong>youtu.be/bYkiLcvLvjM</strong></p>
+      <p>Materi: kelola tagihan akademik, transparansi keuangan, pengajuan cicilan BPP, dan cara download KSM setelah perwalian.</p>
+    </div>
+  </div>
+</div>
+
+
+</div><!-- /.wrap -->
+</main>
+
+<footer>
+  <p>Disusun dari percakapan WAG <span>IUP_ITB 2026</span> · Maret – Juni 2026</p>
+  <p style="margin-top:4px;font-size:11px">Tanggal pada setiap kutipan menunjukkan kapan pesan dikirim di WAG. Verifikasi ke sumber resmi sebelum mengambil keputusan.<br>Info lebih lanjut: <a href="https://www.iom-itb.id" target="_blank">iom-itb.id</a> · <a href="https://admission.itb.ac.id" target="_blank">admission.itb.ac.id</a></p>
+</footer>
+
+<script>
+  // ── Toggle accordion ──
+  function toggle(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-q.open').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('visible');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('visible');
+    }
+  }
+
+  // ── Search ──
+  function searchFAQ(query) {
+    const q = query.toLowerCase().trim();
+    const emptyMsg = document.getElementById('search-empty');
+    let totalVisible = 0;
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const match = !q || item.textContent.toLowerCase().includes(q);
+      item.classList.toggle('hidden', !match);
+      if (match) totalVisible++;
+    });
+
+    document.querySelectorAll('.section').forEach(sec => {
+      const hasVisible = sec.querySelectorAll('.faq-item:not(.hidden)').length > 0;
+      sec.classList.toggle('section-hidden', q ? !hasVisible : false);
+    });
+
+    emptyMsg.style.display = (q && totalVisible === 0) ? 'inline' : 'none';
+  }
+
+  // ── Active nav on scroll ──
+  const navEl   = document.getElementById('main-nav');
+  const navLinks = navEl.querySelectorAll('a');
+  const allSections = document.querySelectorAll('.section[id]');
+
+  function getScrollOffset() {
+    // nav + search bar heights + small buffer
+    const sw = document.querySelector('.search-wrap');
+    return navEl.offsetHeight + (sw ? sw.offsetHeight : 0) + 20;
+  }
+
+  window.addEventListener('scroll', () => {
+    const offset = getScrollOffset();
+    let current = '';
+    allSections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - offset) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }, { passive: true });
+
+  // Highlight first section on load
+  window.dispatchEvent(new Event('scroll'));
+</script>
+</body>
+</html>
